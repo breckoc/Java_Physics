@@ -26,4 +26,8 @@ public class PhysicsBall {
     public int getSize(){
         return this.size;
     }
+
+    public boolean outOfBounds(int width,int height){
+        return this.x < -this.size || this.x > width || this.y < 0 || this.y > height;
+    }
 }

@@ -15,7 +15,6 @@ public class PhysicsPanel extends JPanel {
         this.physics_mouse_listener = new PhysicsMouseListener(this);
         addMouseListener(physics_mouse_listener);
         this.gravity = gravity;
-        this.physics_balls.add(new PhysicsBall(50,50,0,0,40));
     }
     public void paint(Graphics g){
         super.paint(g);
@@ -27,9 +26,15 @@ public class PhysicsPanel extends JPanel {
         }
     }
     public void update(){
-        for(PhysicsBall ball:this.physics_balls){
+        PhysicsBall ball;
+        for(int i = 0; i < this.physics_balls.size(); i++){
+            ball = this.physics_balls.get(i);
             ball.applyGravity(this.gravity);
             ball.update();
+            if(ball.outOfBounds(this.getWidth(),this.getHeight())) {
+                physics_balls.remove(ball);
+                i--;
+            }
         }
         repaint();
     }
